@@ -35,7 +35,7 @@ void testApp::setup(){
     nearThreshold = 255;
     farThreshold = 215;
 
-     simpArg1 = 5;
+     simpArg1 = 10;
      simpArg2  = 0.5;
      repulsForce  = 10;
      repulsRadius = 10;
@@ -53,7 +53,7 @@ void testApp::update(){
 
       grayImage.setFromPixels(kinect.getDepthPixels(), kinect.width, kinect.height);
       grayImage.mirror(false, true);
-      grayImage.blurHeavily();
+      //grayImage.blurHeavily();
       grayThreshNear = grayImage;
 			grayThreshFar = grayImage;
 			grayThreshNear.threshold(nearThreshold, true);
@@ -120,10 +120,10 @@ void testApp::update(){
 		particleSystem.addRepulsionForce(cur, 3, 1);
 		// forces on this particle
 		cur.bounceOffWalls(0, 0, ofGetWidth(), ofGetHeight());
-		cur.addDampingForce();
+		//cur.addDampingForce();
 	}
 	// single global forces
-	particleSystem.addAttractionForce(ofGetWidth() / 2, ofGetHeight(), 5000, 0.01);
+	//particleSystem.addAttractionForce(ofGetWidth() / 2, ofGetHeight(), 5000, 0.01);
 
 
 	for(int i = 0; i < contourPoly.size(); i++){
@@ -140,11 +140,13 @@ void testApp::update(){
 void testApp::draw(){
 	ofSetColor(255, 255, 255);
 	ofFill();
+	/*
 	for(int i = 0; i<contour2Draw.size(); i++){
 
     contour2Draw[i].draw();
 
 	}
+	*/
 	particleSystem.draw();
 
 	ofDrawBitmapString(ofToString(kParticles) + "k particles", 32, 32);
@@ -176,6 +178,12 @@ void testApp::keyPressed(int key){
         cout<<"radius: " + ofToString(repulsRadius)<<endl;
       }
 
+      break;
+      case 'q':
+        farThreshold ++;
+      break;
+      case'a':
+        farThreshold--;
       break;
 	}
 }

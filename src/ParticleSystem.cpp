@@ -92,11 +92,11 @@ void ParticleSystem::update() {
 
 void ParticleSystem::draw() {
 	int n = particles.size();
-	//glEnable(GL_POINT_SIZE);
-	//glPointSize(2);
+	glEnable(GL_POINT_SIZE);
+	glPointSize(5);
 	glBegin(GL_POINTS);
 	for(int i = 0; i < n; i++)
 		particles[i].draw();
 	glEnd();
-	//glDisable(GL_POINT_SIZE);
+	glDisable(GL_POINT_SIZE);
 }
